@@ -1,0 +1,7 @@
+crate/target/
+crate/pkg/
+**/*.rs.bk
+node_modules/
+dist/
+pkg/
+assets/

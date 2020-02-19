@@ -1,0 +1,35 @@
+{
+  "name": "sudachiclone-wasm",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "webpack-dev-server",
+    "build": "webpack",
+    "build-tsd": "wasm-pack build ./crate --dev --out-dir pkg --out-name index -- --features wee_alloc --features console_error_panic_hook"
+  },
+  "author": "Yasu_umiNishikawa <yasu.umi.19910101@gmail.com>",
+  "license": "APACHE-2.0",
+  "dependencies": {},
+  "devDependencies": {
+    "@material-ui/core": "^4.9.3",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.43",
+    "@types/pako": "^1.0.1",
+    "@types/react": "^16.9.20",
+    "@types/react-dom": "^16.9.5",
+    "@wasm-tool/wasm-pack-plugin": "^1.0.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "comlink": "^4.2.0",
+    "html-webpack-plugin": "^3.2.0",
+    "http-server": "^0.12.1",
+    "json-stringify-pretty-compact": "^2.0.0",
+    "pako": "^1.0.11",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.5",
+    "webpack": "^4.39.2",
+    "webpack-cli": "^3.3.7",
+    "webpack-dev-server": "^3.8.0",
+    "worker-plugin": "3.1.0"
+  }
+}

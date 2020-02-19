@@ -1,0 +1,24 @@
+[package]
+name = "crate"
+version = "0.1.0"
+edition = "2018"
+
+[dependencies]
+wasm-bindgen = { version = "^0.2", features = ["serde-serialize"] }
+serde = "1.0.104"
+serde_derive = "1.0.104"
+typescript-definitions = { git = "https://github.com/onelson/typescript-definitions", branch = "no-debug-attrs", features=["type-guards"] }
+sudachiclone = { version = "0.2.0", features = ["wasm-bindgen"] }
+lazy_static = "1.4.0"
+console_error_panic_hook = { version = "0.1.6", optional = true }
+wee_alloc = { version = "0.4.2", optional = true }
+
+[lib]
+crate-type = ["cdylib"]
+
+[features]
+default = []
+
+[profile.release]
+lto = true
+opt-level = "z"

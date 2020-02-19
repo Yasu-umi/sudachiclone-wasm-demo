@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "es2018",
+    "module": "esNext",
+    "strict": true,
+    "strictNullChecks": true,
+    "moduleResolution": "node",
+    "noEmit": false,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "lib": [
+      "DOM",
+      "ES2015",
+      "webworker"
+    ],
+    "jsx": "react",
+    "incremental": true,
+  }
+}
