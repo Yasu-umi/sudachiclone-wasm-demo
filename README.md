@@ -17,3 +17,11 @@ start webpack-dev-server
 ```bash
 yarn run dev
 ```
+
+## deploy
+
+deploy to [github pages](https://yasu-umi.github.io/sudachiclone-wasm-demo/)
+
+```bash
+yarn run deploy
+```

@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "webpack-dev-server",
     "build": "webpack",
-    "build-tsd": "wasm-pack build ./crate --dev --out-dir pkg --out-name index -- --features wee_alloc --features console_error_panic_hook"
+    "build-tsd": "wasm-pack build ./crate --dev --out-dir pkg --out-name index -- --features wee_alloc --features console_error_panic_hook",
+    "deploy": "gh-pages -d dist"
   },
   "author": "Yasu_umiNishikawa <yasu.umi.19910101@gmail.com>",
   "license": "APACHE-2.0",
