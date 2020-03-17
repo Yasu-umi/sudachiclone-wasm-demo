@@ -8,7 +8,7 @@ const wasmImport = import("../crate/pkg");
 interface This {
   initialized: boolean;
   loaded: boolean;
-  _read_from_bin: (system_dict_bin: Uint8Array, char_def_bin: Uint8Array) => ErrorValue;
+  _readFromBin: (system_dict_bin: Uint8Array, char_def_bin: Uint8Array) => ErrorValue;
   _tokenize: (text: string) => TokenizeResult;
 }
 
@@ -18,12 +18,12 @@ export class WasmModule {
 
   async initialize(this: This) {
     if (this.initialized) { return }
-    console.debug(new Date(), "worker: start initialize");
+    console.debug((new Date()).toISOString(), "worker: start initialize");
     const wasm = await wasmImport;
-    this._read_from_bin = wasm.read_from_bin;
+    this._readFromBin = wasm.read_from_bin;
     this._tokenize = wasm.tokenize;
-    console.debug(new Date(), "worker: loaded wasm");
     this.initialized = true;
+    console.debug((new Date()).toISOString(), "worker: finish initialize");
   }
 
   async tokenize(this: This, text: string) {
@@ -34,11 +34,13 @@ export class WasmModule {
       throw new Error("NotDictionaryLoaded");
     }
 
-    console.debug(new Date(), "worker: tokenize text", text);
+    console.debug((new Date()).toISOString(), "worker: tokenize text", text);
     const result = await this._tokenize(text);
     if (result.ok) {
+      console.debug((new Date()).toISOString(), "worker: tokenize results", result.ok);
       return { type: "results" as "results", results: result.ok };
     } else if (result.err) {
+      console.error((new Date()).toISOString(), "worker: tokenize  error", result.err.error);
       return { type: "error" as "error", error: result.err.error || "EmptyResponse" };
     } else {
       return { type: "error" as "error", error: "EmptyResponse" };
@@ -49,7 +51,7 @@ export class WasmModule {
     if (!this.initialized) {
       throw new Error("NotWasmInitialized");
     }
-    console.debug(new Date(), "worker: read_from_bin start fetch");
+    console.debug((new Date()).toISOString(), "worker: readFromBin start fetch");
     const [systemDicBin, charDefBin] = await Promise.all([
       (async () => {
         const res = await fetch(systemDicTarGzURL, { mode: "cors" });
@@ -66,11 +68,13 @@ export class WasmModule {
         return new Uint8Array(buf);
       })()
     ]);
-    console.debug(new Date(), "worker: read_from_bin finish fetch");
-    console.debug(new Date(), "worker: systemDicBin.length", systemDicBin.length);
-    console.debug(new Date(), "worker: charDefBin.length", charDefBin.length);
-    const result = await this._read_from_bin(systemDicBin, charDefBin);
+    console.debug((new Date()).toISOString(), "worker: readFromBin finish fetch");
+    console.debug((new Date()).toISOString(), "worker: systemDicBin.length", systemDicBin.length);
+    console.debug((new Date()).toISOString(), "worker: charDefBin.length", charDefBin.length);
+    console.debug((new Date()).toISOString(), "worker: readFromBin start load");
+    const result = await this._readFromBin(systemDicBin, charDefBin);
     this.loaded = true;
+    console.debug((new Date()).toISOString(), "worker: readFromBin finish load");
     return result;
   }
 };

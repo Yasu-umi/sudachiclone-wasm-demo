@@ -132,7 +132,7 @@ const App = () => {
           <Grid item>
             <div>this is <a href="https://github.com/Yasu-umi/sudachiclone-rs">sudachiclone-rs</a> wasm demo.</div>
             <div>1. push load dic btn.</div>
-            <div>3. wait 10 sec patiently.</div>
+            <div>3. wait 40 sec patiently.</div>
             <div>3. type sentence.</div>
             <div>4. push tokenize btn.</div>
           </Grid>
